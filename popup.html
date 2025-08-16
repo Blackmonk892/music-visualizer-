@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music Visualizer</title>
+    <style>
+      body {
+        width: 320px;
+        height: 400px;
+        margin: 0;
+        padding: 20px;
+        background: linear-gradient(135deg, #1e1e1e, #2d2d2d);
+        color: white;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 24px;
+        background: linear-gradient(45deg, #00ffcc, #0080ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .controls {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .control-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      label {
+        font-size: 14px;
+        font-weight: 500;
+        color: #ccc;
+      }
+
+      input[type="file"],
+      select,
+      button {
+        padding: 10px;
+        border: 1px solid #444;
+        border-radius: 8px;
+        background: #333;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      input[type="file"]:hover,
+      select:hover,
+      button:hover {
+        background: #444;
+        border-color: #00ffcc;
+      }
+
+      input[type="color"] {
+        width: 100%;
+        height: 40px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 10px;
+      }
+
+      .primary-btn {
+        background: linear-gradient(45deg, #00ffcc, #0080ff);
+        border: none;
+        font-weight: 500;
+      }
+
+      .primary-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
+      }
+
+      .secondary-btn {
+        background: #444;
+        border: 1px solid #666;
+      }
+
+      .status {
+        text-align: center;
+        padding: 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        margin-top: 15px;
+      }
+
+      .status.success {
+        background: rgba(0, 255, 0, 0.1);
+        color: #00ff88;
+        border: 1px solid rgba(0, 255, 0, 0.3);
+      }
+
+      .status.error {
+        background: rgba(255, 0, 0, 0.1);
+        color: #ff6b6b;
+        border: 1px solid rgba(255, 0, 0, 0.3);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Music Visualizer</h1>
+    </div>
+
+    <div class="controls">
+      <div class="control-group">
+        <label for="audioFile">Load Audio File</label>
+        <input type="file" id="audioFile" accept="audio/*" />
+      </div>
+
+      <div class="control-group">
+        <label for="visualMode">Visualization Mode</label>
+        <select id="visualMode">
+          <option value="bars">Frequency Bars</option>
+          <option value="circle">Circular</option>
+          <option value="particles">Particles</option>
+          <option value="landscape">Landscape</option>
+          <option value="waveform">Waveform</option>
+          <option value="fluid">Fluid Dynamics</option>
+          <option value="neural">Neural Network</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <label for="colorPicker">Primary Color</label>
+        <input type="color" id="colorPicker" value="#00ffcc" />
+      </div>
+
+      <div class="button-group">
+        <button id="micButton" class="secondary-btn">Use Microphone</button>
+        <button id="launchButton" class="primary-btn">Launch Visualizer</button>
+      </div>
+    </div>
+
+    <div id="status" class="status" style="display: none"></div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music Visualizer</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: white;
+        height: 100%;
+        width: 100%;
+        background: black;
+      }
+
+      #visualizer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+        background: black;
+      }
+
+      #controls {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 24px;
+        border-radius: 16px;
+        background: rgba(20, 20, 20, 0.4);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 20px rgba(0, 255, 200, 0.1);
+        z-index: 10;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      #controls.visible {
+        opacity: 1;
+      }
+
+      #controls input[type="file"],
+      #controls button,
+      #controls select,
+      #controls input[type="color"] {
+        background: rgba(34, 34, 34, 0.9);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 10px 14px;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: all 0.2s ease;
+        cursor: pointer;
+      }
+
+      #controls input[type="file"] {
+        padding: 6px;
+      }
+
+      #controls input[type="color"] {
+        padding: 0;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: none;
+      }
+
+      #controls button:hover,
+      #controls select:hover,
+      #controls input[type="file"]:hover {
+        background: rgba(68, 68, 68, 0.9);
+        transform: scale(1.05);
+      }
+
+      #loading {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        z-index: 100;
+      }
+
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-top: 4px solid #00ffcc;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media screen and (max-width: 600px) {
+        #controls {
+          flex-direction: column;
+          bottom: 10px;
+          padding: 12px 16px;
+          gap: 10px;
+        }
+
+        #controls input,
+        #controls select,
+        #controls button {
+          width: 100%;
+          font-size: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="visualizer"></canvas>
+
+    <div id="loading">
+      <div class="spinner"></div>
+      <p>Loading Music Visualizer...</p>
+    </div>
+
+    <div id="controls">
+      <input type="file" id="audioFile" accept="audio/*" />
+      <button id="micButton">Use Microphone</button>
+      <select id="visualMode">
+        <option value="bars">Bars</option>
+        <option value="circle">Circle</option>
+        <option value="particles">Particles</option>
+        <option value="landscape">Landscape</option>
+        <option value="waveform">Waveform</option>
+        <option value="fluid">Fluid Dynamics</option>
+        <option value="neural">Neural Web</option>
+      </select>
+      <input type="color" id="colorPicker" value="#00ffcc" />
+      <button id="fullscreen">Fullscreen</button>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/audioEngine.js"></script>
+    <script src="js/visualizer.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
